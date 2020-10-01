@@ -29,7 +29,11 @@ from ecommerce.core.constants import (
     HUBSPOT_FORMS_INTEGRATION_ENABLE,
     ISO_8601_FORMAT
 )
-from ecommerce.core.url_utils import get_lms_enrollment_api_url, get_lms_entitlement_api_url
+from ecommerce.core.url_utils import (
+    get_lms_enrollment_api_url,
+    get_lms_entitlement_api_url,
+    get_external_enrollment_api_url,
+)
 from ecommerce.courses.models import Course
 from ecommerce.courses.utils import mode_for_product
 from ecommerce.enterprise.conditions import BasketAttributeType
@@ -37,7 +41,11 @@ from ecommerce.enterprise.utils import (
     get_enterprise_customer_uuid_from_voucher,
     get_or_create_enterprise_customer_user
 )
-from ecommerce.extensions.analytics.utils import audit_log, parse_tracking_context
+from ecommerce.extensions.analytics.utils import (
+    audit_log,
+    get_utm_session_parameters,
+    parse_tracking_context,
+)
 from ecommerce.extensions.api.v2.views.coupons import CouponViewSet
 from ecommerce.extensions.basket.constants import PURCHASER_BEHALF_ATTRIBUTE
 from ecommerce.extensions.basket.models import BasketAttribute
@@ -48,6 +56,7 @@ from ecommerce.extensions.payment.models import EnterpriseContractMetadata
 from ecommerce.extensions.voucher.models import OrderLineVouchers
 from ecommerce.extensions.voucher.utils import create_vouchers
 from ecommerce.notifications.notifications import send_notification
+from ecommerce.programs.utils import get_program
 
 BasketAttributeType = get_model('basket', 'BasketAttributeType')
 Benefit = get_model('offer', 'Benefit')
@@ -461,6 +470,14 @@ class EnrollmentFulfillmentModule(BaseFulfillmentModule):
                 order.notes.create(message='Fulfillment of order failed due to a request time out.', note_type='Error')
                 line.set_status(LINE.FULFILLMENT_TIMEOUT_ERROR)
         logger.info("Finished fulfilling 'Seat' product types for order [%s]", order.number)
+
+        try:
+            self._post_to_salesforce(order, lines)
+        except Exception as e:  # pylint: disable=broad-except
+            logger.error(
+                "Unable to complete salesforce enrollment: [%s]", str(e)
+            )
+
         return order, lines
 
     def revoke_line(self, line):
@@ -505,6 +522,86 @@ class EnrollmentFulfillmentModule(BaseFulfillmentModule):
             logger.exception('Failed to revoke fulfillment of Line [%d].', line.id)
 
         return False
+
+    def get_program_info(self, order):
+        """ Gets the program metadata if available.
+        """
+        BUNDLE = 'bundle_identifier'
+        program = None
+
+        try:
+            bundle_id = BasketAttribute.objects.get(basket=order.basket, attribute_type__name=BUNDLE).value_text
+            program = get_program(bundle_id, order.basket.site.siteconfiguration)
+            if len(order.lines.all()) < len(program.get('courses')):
+                variant = 'partial'
+            else:
+                variant = 'full'
+            bundle_product = {
+                'id': bundle_id,
+                'price': '0',
+                'quantity': str(len(order.lines.all())),
+                'category': 'bundle',
+                'variant': variant,
+                'name': program.get('title')
+            }
+            program['bundle_product'] = bundle_product
+        except BasketAttribute.DoesNotExist:
+            logger.info(
+                'Failed to get program info: There is no program or bundle associated with order number %s',
+                order.number
+            )
+
+        return program
+
+    def _post_to_salesforce(self, order, supported_lines):
+        """ POST enrollment data to Salesforce instance.
+        """
+        timeout = settings.ENROLLMENT_FULFILLMENT_TIMEOUT
+        headers = {
+            'Content-Type': 'application/json',
+            'X-Edx-Api-Key': settings.EDX_API_KEY
+        }
+        payload = dict()
+        program = self.get_program_info(order)
+
+        if program:
+            payload['program'] = program
+
+        order_details = {
+            'paid_amount': str(order.total_excl_tax),
+            'currency': order.currency,
+            'discount': str(order.total_discount_incl_tax),
+            'supported_lines': [
+                {
+                    'user_email': order.user.email,
+                    'course_mode': mode_for_product(line.product),
+                    'course_id': line.product.attr.course_key,
+                    'ecommerce_name': line.product.course.id if line.product.course else line.product.title,
+                    'price': str(line.line_price_excl_tax),
+                }
+                for line in supported_lines
+            ],
+        }
+        payload.update(order_details)
+        payload.update(get_utm_session_parameters())
+
+        logger.info("Calling salesforce enrollment plugin with: %s", payload)
+        try:
+            response = requests.post(
+                "{}{}".format(get_external_enrollment_api_url(), 'salesforce-enrollment'),
+                data=json.dumps(payload),
+                headers=headers,
+                timeout=timeout
+            )
+            logger.info(
+                "Salesforce external enrollment call completed - response: %s",
+                response.text
+            )
+        except Exception as e:  # pylint: disable=broad-except
+            logger.error(
+                "Salesforce external enrollment call failed, reason: %s",
+                str(e)
+            )
 
 
 class CouponFulfillmentModule(BaseFulfillmentModule):

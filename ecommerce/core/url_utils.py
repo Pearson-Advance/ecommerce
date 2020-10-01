@@ -117,3 +117,10 @@ def absolute_url(request, reverse_string):
 
 def absolute_redirect(request, reverse_string):
     return HttpResponseRedirect(absolute_url(request, reverse_string))
+
+
+def get_external_enrollment_api_url():
+    """
+    Returns the external enrollment api url.
+    """
+    return get_lms_url('/openedx_external_enrollments/api/v0/')
