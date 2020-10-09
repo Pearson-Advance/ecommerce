@@ -3,10 +3,13 @@ from __future__ import absolute_import
 import hashlib
 
 from django.conf import settings
+from django.core.cache import cache
 from django.utils.translation import ugettext_lazy as _
 from edx_django_utils.cache import TieredCache
+from edx_rest_api_client.client import EdxRestApiClient
 from opaque_keys.edx.keys import CourseKey
 
+from ecommerce.core.url_utils import get_lms_url
 from ecommerce.core.utils import deprecated_traverse_pagination
 
 
@@ -38,6 +41,10 @@ def get_course_info_from_catalog(site, product):
     cache_key = u'courses_api_detail_{}{}'.format(key, partner_short_code)
     cache_key = hashlib.md5(cache_key.encode('utf-8')).hexdigest()
     course_cached_response = TieredCache.get_cached_response(cache_key)
+
+    if getattr(settings, 'ENABLE_GET_COURSE_INFO_FROM_LMS', False):
+        return get_course_info_from_lms(key, cache_key)
+
     if course_cached_response.is_found:
         return course_cached_response.value
 
@@ -47,6 +54,20 @@ def get_course_info_from_catalog(site, product):
         course = api.course_runs(key).get(partner=partner_short_code)
 
     TieredCache.set_all_tiers(cache_key, course, settings.COURSES_API_CACHE_TIMEOUT)
+    return course
+
+
+def get_course_info_from_lms(course_key, cache_key):
+    """ Get course information from LMS via the course api and cache """
+    course = cache.get(cache_key)
+
+    if not course:  # pragma: no cover
+        api = EdxRestApiClient(
+            get_lms_url('api/courses/v1/'),
+        )
+        course = api.courses(course_key).get()
+        cache.set(cache_key, course, settings.COURSES_API_CACHE_TIMEOUT)
+
     return course
 
 
