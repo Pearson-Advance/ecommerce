@@ -271,9 +271,19 @@ class BasketLogicMixin:
                 course_data['image_url'] = course['image']['src']
             except (KeyError, TypeError):
                 pass
+            try:
+                course_data['image_url'] = course['card_image_url']
+            except (KeyError, TypeError):
+                pass
+
+            if not course_data['image_url']:
+                try:
+                    course_data['image_url'] = course['media']['image']['raw']
+                except (KeyError, TypeError):
+                    pass
 
             course_data['product_description'] = course.get('short_description', '')
-            course_data['product_title'] = course.get('title', '')
+            course_data['product_title'] = course.get('name', course.get('title',''))
 
             # The course start/end dates are not currently used
             # in the default basket templates, but we are adding
