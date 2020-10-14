@@ -193,6 +193,7 @@ class ReceiptResponseView(ThankYouView):
             'explore_courses_url': get_lms_explore_courses_url(),
             'has_enrollment_code_product': has_enrollment_code_product,
             'disable_back_button': self.request.GET.get('disable_back_button', 0),
+            'custom_settings': self.request.site.siteconfiguration.custom_settings,
         })
         return context
 
