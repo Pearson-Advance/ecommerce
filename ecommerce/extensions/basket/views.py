@@ -593,6 +593,7 @@ class BasketSummaryView(BasketLogicMixin, BasketView):
             'max_seat_quantity': 100,
             'payment_processors': payment_processors,
             'lms_url_root': site_configuration.lms_url_root,
+            'custom_settings': site_configuration.custom_settings,
         })
         return context
 

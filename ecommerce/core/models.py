@@ -214,6 +214,12 @@ class SiteConfiguration(models.Model):
         null=True,
         blank=True
     )
+    custom_settings = JSONField(
+        verbose_name=_('Custom settings'),
+        help_text=_('JSON string containing custom backend settings.'),
+        blank=True,
+        default={},
+    )
 
     @property
     def payment_processors_set(self):
