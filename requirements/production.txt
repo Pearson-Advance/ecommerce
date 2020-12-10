@@ -64,6 +64,7 @@ edx-rest-api-client==1.9.2  # via -c requirements/pins.txt, -r requirements/base
 factory-boy==2.12.0       # via django-oscar
 faker==4.0.3              # via factory-boy
 future==0.18.2            # via pyjwkest
+gevent==1.0.2			  # Added manually
 gunicorn==19.7.1          # via -r requirements/production.in
 idna==2.9                 # via requests
 isodate==0.6.0            # via zeep
