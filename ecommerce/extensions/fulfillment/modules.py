@@ -568,6 +568,7 @@ class EnrollmentFulfillmentModule(BaseFulfillmentModule):
             payload['program'] = program
 
         order_details = {
+            'number': order.number, 
             'paid_amount': str(order.total_excl_tax),
             'currency': order.currency,
             'discount': str(order.total_discount_incl_tax),
