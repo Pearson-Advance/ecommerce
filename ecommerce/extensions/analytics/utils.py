@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import json
 import logging
 from functools import wraps
+from urllib.parse import urlencode
 
 from django.db import transaction
 from six.moves.urllib.parse import urlunsplit  # pylint: disable=import-error
@@ -240,4 +241,6 @@ def get_utm_session_parameters():
         data.update(request.COOKIES)
         data.update(request.GET.dict())
 
-    return {key: data[key] for key in utm_keys if key in data}
+    utm_params = {key: data[key] for key in utm_keys if key in data}
+
+    return {"utm_params": urlencode(utm_params)}
