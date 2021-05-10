@@ -1,0 +1,28 @@
+name: assign_by_path
+
+on:
+  pull_request:
+    branches:
+      - 'pearson-release/*.master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Assign by path
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - '**/migrations/*'
+      
+      - name: Auto Assign DevOps if exist migrations changes
+        uses: rowi1de/auto-assign-review-teams@v1.0.1
+        if: steps.changes.outputs.src == 'true'
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          teams: "Pearson-Advance/devops"
+          include-draft: false
+          skip-with-manual-reviewers: 4

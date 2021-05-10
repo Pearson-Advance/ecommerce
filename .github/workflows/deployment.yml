@@ -1,0 +1,40 @@
+name: ecomm deployment
+
+on:
+  push:
+    branches:
+      - 'pearson-release/*.master'
+      - 'pearson-release/*.dev'
+
+jobs:
+  build-dev:
+    name: Build Dev deployment
+    if: endsWith(github.ref, '.dev')
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build jenkins jobs
+      uses: Mondtic/build-jenkins-job@v1.0.0
+      with:
+        jenkins-url: ${{ secrets.JENKINS_URL }}
+        jenkins-token: ${{ secrets.JENKINS_TOKEN }}
+        jenkins-user: ${{ secrets.JENKINS_USER }}
+        jenkins-job: ${{ secrets.JENKINS_JOB }}
+        jenkins-job-params: '{"NODE": "dev", "ENVIRONMENT": "dev", "BRANCH_CUSTOMER_DATA": "development"}'
+        jenkins-wait-job: 'no-wait'
+
+  build-prod:
+    name: Build Prod deployment
+    if: endsWith(github.ref, '.master')
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build jenkins jobs
+      uses: Mondtic/build-jenkins-job@v1.0.0
+      with:
+        jenkins-url: ${{ secrets.JENKINS_URL }}
+        jenkins-token: ${{ secrets.JENKINS_TOKEN }}
+        jenkins-user: ${{ secrets.JENKINS_USER }}
+        jenkins-job: ${{ secrets.JENKINS_JOB }}
+        jenkins-job-params: '{"NODE": "master", "ENVIRONMENT": "prod", "BRANCH_CUSTOMER_DATA": "production"}'
+        jenkins-wait-job: 'no-wait'
