@@ -660,7 +660,7 @@ class CouponRedeemViewTests(CouponMixin, DiscoveryTestMixin, LmsApiMockMixin, En
             consent_token=consent_token
         )
         last_request = httpretty.last_request()
-        self.assertEqual(last_request.path, '/api/enrollment/v1/enrollment')
+        self.assertEqual(last_request.path, '/openedx_external_enrollments/api/v0/salesforce-enrollment')
         self.assertEqual(last_request.method, 'POST')
 
     @httpretty.activate
