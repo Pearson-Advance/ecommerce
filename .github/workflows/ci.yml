@@ -33,7 +33,7 @@ jobs:
           docker exec -t ecommerce_testing bash -c "
             . /edx/app/ecommerce/venvs/ecommerce/bin/activate &&
             cd /edx/app/ecommerce/ecommerce/ &&
-            python3 -m pip install tox
+            python -m pip install tox
           "
       - name: Run tests
         run: |
