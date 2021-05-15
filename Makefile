@@ -1,6 +1,5 @@
 NODE_BIN=./node_modules/.bin
 DIFF_COVER_BASE_BRANCH=master
-PYTHON_ENV=py35
 DJANGO_ENV_VAR=$(if $(DJANGO_ENV),$(DJANGO_ENV),django22)
 
 help:
@@ -50,10 +49,10 @@ production-requirements: requirements.js
 	pip install -r requirements.txt --exists-action w
 
 migrate: requirements.tox
-	tox -e $(PYTHON_ENV)-migrate
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-migrate
 
 serve: requirements.tox
-	tox -e $(PYTHON_ENV)-serve
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-serve
 
 clean:
 	find . -name '*.pyc' -delete
@@ -110,13 +109,13 @@ e2e: requirements.tox
 	tox -e $(PYTHON_ENV)-e2e
 
 extract_translations: requirements.tox
-	tox -e $(PYTHON_ENV)-extract_translations
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-extract_translations
 
 dummy_translations: requirements.tox
-	tox -e $(PYTHON_ENV)-dummy_translations
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-dummy_translations
 
 compile_translations: requirements.tox
-	tox -e $(PYTHON_ENV)-compile_translations
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-compile_translations
 
 fake_translations: extract_translations dummy_translations compile_translations
 
@@ -130,13 +129,13 @@ update_translations: pull_translations fake_translations
 
 # extract_translations should be called before this command can detect changes
 detect_changed_source_translations: requirements.tox
-	tox -e $(PYTHON_ENV)-detect_changed_translations
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-detect_changed_translations
 
 check_translations_up_to_date: fake_translations detect_changed_source_translations
 
 # Validate translations
 validate_translations: requirements.tox
-	tox -e $(PYTHON_ENV)-validate_translations
+	tox -e $(PYTHON_ENV)-${DJANGO_ENV_VAR}-validate_translations
 
 # Scan the Django models in all installed apps in this project for restricted field names
 check_keywords: requirements.tox
