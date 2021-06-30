@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - 'pearson-release/*.master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - testname: quality-and-jobs
+            targets: PYTHON_ENV_VAR=py35 requirements.js check_translations_up_to_date validate_translations clean_static static quality validate_js check_keywords
+            django-env: django22
+          - testname: test-python
+            targets: PYTHON_ENVI_VAR=py35 requirements.js clean_static static validate_python
+            django-env: django22
+          - testname: quality-and-jobs
+            targets: PYTHON_ENVI_VAR=py38 requirements.js check_translations_up_to_date validate_translations clean_static static quality validate_js check_keywords
+            django-env: django22
+          - testname: test-python
+            targets: PYTHON_ENVI_VAR=py38 requirements.js clean_static static validate_python
+            django-env: django22
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start container
+        run: |
+          docker-compose -f ./.ci/docker-compose-ci.yml up -d
+      - name: Install dependencies
+        run: |
+          docker exec -t ecommerce_testing bash -c "
+            . /edx/app/ecommerce/venvs/ecommerce/bin/activate &&
+            cd /edx/app/ecommerce/ecommerce/ &&
+            python -m pip install tox
+          "
+      - name: Run tests
+        run: |
+          docker exec -t -e CI=1 ecommerce_testing bash -c "
+            . /edx/app/ecommerce/venvs/ecommerce/bin/activate &&
+            cd /edx/app/ecommerce/ecommerce/ &&
+            PATH=\$PATH:/edx/app/ecommerce/nodeenvs/ecommerce/bin:/snap/bin
+            DJANGO_ENV=${{ matrix.django-env }} make ${{ matrix.targets }}
+          "
