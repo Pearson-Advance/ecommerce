@@ -5,10 +5,10 @@ import logging
 from functools import wraps
 from urllib.parse import urlencode
 
+from crum import get_current_request
 from django.db import transaction
 from six.moves.urllib.parse import urlunsplit  # pylint: disable=import-error
 
-from crum import get_current_request
 from ecommerce.courses.utils import mode_for_product
 
 logger = logging.getLogger(__name__)
