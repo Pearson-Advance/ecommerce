@@ -13,6 +13,7 @@ from ecommerce.extensions.offer.constants import OFFER_ASSIGNED, OFFER_ASSIGNMEN
 from ecommerce.extensions.offer.models import OfferAssignment, OfferAssignmentEmailAttempt
 from ecommerce.extensions.test import factories
 from ecommerce.tests.testcases import TestCase
+from ecommerce.tests.utils import DoesNotExist
 
 
 @ddt.ddt
@@ -52,7 +53,7 @@ class AssignmentEmailStatusTests(TestCase):
                 'error': 'OfferAssignment matching query does not exist.'
             },
             ("[Offer Assignment] AssignmentEmailStatus update raised: "
-             "DoesNotExist('OfferAssignment matching query does not exist.',)"),
+             "{}".format(repr(DoesNotExist('OfferAssignment matching query does not exist.')))),
             500,
         ),
         (
