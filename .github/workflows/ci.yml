@@ -15,13 +15,13 @@ jobs:
             targets: PYTHON_ENV_VAR=py35 requirements.js check_translations_up_to_date validate_translations clean_static static quality validate_js check_keywords
             django-env: django22
           - testname: test-python
-            targets: PYTHON_ENVI_VAR=py35 requirements.js clean_static static validate_python
+            targets: PYTHON_ENV_VAR=py35 requirements.js clean_static static validate_python
             django-env: django22
           - testname: quality-and-jobs
-            targets: PYTHON_ENVI_VAR=py38 requirements.js check_translations_up_to_date validate_translations clean_static static quality validate_js check_keywords
+            targets: PYTHON_ENV_VAR=py38 requirements.js check_translations_up_to_date validate_translations clean_static static quality validate_js check_keywords
             django-env: django22
           - testname: test-python
-            targets: PYTHON_ENVI_VAR=py38 requirements.js clean_static static validate_python
+            targets: PYTHON_ENV_VAR=py38 requirements.js clean_static static validate_python
             django-env: django22
     steps:
       - uses: actions/checkout@v2
