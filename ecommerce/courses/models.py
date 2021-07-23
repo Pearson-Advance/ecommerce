@@ -129,6 +129,14 @@ class Course(models.Model):
 
     def get_course_seat_name(self, certificate_type, id_verification_required):
         """ Returns the name for a course seat. """
+        if (getattr(settings, 'ENABLE_CUSTOM_COURSE_SEAT_NAME', False) and
+                getattr(settings, 'CUSTOM_SEAT_NAME', '')):
+            name = u'Seat in {} {} course'.format(
+                getattr(settings, 'CUSTOM_SEAT_NAME'),
+                self.name
+            )
+            return name
+
         name = u'Seat in {}'.format(self.name)
 
         if certificate_type != '':
