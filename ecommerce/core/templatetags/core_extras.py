@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+from crum import get_current_request
 from django import template
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -11,11 +12,22 @@ register = template.Library()
 @register.simple_tag
 def settings_value(name):
     """
-    Retrieve a value from settings.
+    Retrieve a value from the site configuration or settings.
+
+    Usage:
+        {% load core_extras %}
+
+        {% settings_value 'site_setting' as setting %}{{ setting }}
+        {% settings_value 'custom_settings' as setting %}{{ setting.my_custom_setting }}
 
     Raises:
         AttributeError if setting not found.
     """
+    request = get_current_request()
+
+    if request.site:
+        return getattr(request.site.siteconfiguration, name)
+
     return getattr(settings, name)
 
 
