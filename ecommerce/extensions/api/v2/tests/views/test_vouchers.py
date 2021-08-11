@@ -435,6 +435,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
             'stockrecords': serializers.StockRecordSerializer(seat.stockrecords.first()).data,
             'title': course.name,
             'voucher_end_date': voucher.end_datetime,
+            'special_coupon': False,
+            'special_coupon_message': '',
         })
 
     def test_get_offers_for_multiple_courses_voucher(self):
@@ -468,6 +470,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
             'stockrecords': serializers.StockRecordSerializer(seat.stockrecords.first()).data,
             'title': course.name,
             'voucher_end_date': voucher.end_datetime,
+            'special_coupon': False,
+            'special_coupon_message': '',
         })
 
     def test_get_offers_for_enterprise_catalog_voucher(self):
@@ -507,6 +511,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
             'stockrecords': serializers.StockRecordSerializer(seat.stockrecords.first()).data,
             'title': course.name,
             'voucher_end_date': voucher.end_datetime,
+            'special_coupon': False,
+            'special_coupon_message': '',
         })
 
     def test_get_offers_for_enterprise_offer(self):
@@ -544,6 +550,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
             'stockrecords': serializers.StockRecordSerializer(seat.stockrecords.first()).data,
             'title': course.name,
             'voucher_end_date': voucher.end_datetime,
+            'special_coupon': False,
+            'special_coupon_message': '',
         })
 
     def test_get_offers_for_enterprise_offer_no_catalog(self):
@@ -602,6 +610,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
             'stockrecords': serializers.StockRecordSerializer(seat.stockrecords.first()).data,
             'title': course.name,
             'voucher_end_date': voucher.end_datetime,
+            'special_coupon': False,
+            'special_coupon_message': '',
         })
 
     def test_get_course_offer_data(self):
@@ -645,6 +655,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
             'stockrecords': serializers.StockRecordSerializer(stock_record).data,
             'title': course.name,
             'voucher_end_date': voucher.end_datetime,
+            'special_coupon': False,
+            'special_coupon_message': '',
         })
 
     def test_get_course_offer_verify_null_fields(self):
@@ -719,6 +731,8 @@ class VoucherViewOffersEndpointTests(DiscoveryMockMixin, CouponMixin, DiscoveryT
                 'stockrecords': serializers.StockRecordSerializer(seat.stockrecords.first()).data,
                 'title': course.name,
                 'voucher_end_date': voucher.end_datetime,
+                'special_coupon': False,
+                'special_coupon_message': '',
             }],
         )
 

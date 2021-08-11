@@ -22,15 +22,19 @@
                 <div class="box-shadow col-xs-12">
                     <div class="col-sm-5">
                         <div class="image-container">
+                        <% if (!course.attributes.special_coupon) { %>
                             <div class="discount-percentage"><p><%= course.attributes.benefit_value %>
                                 <span><%- gettext('off') %></span></p>
                             </div>
+                        <% } %>
                             <img class="img-responsive" src="<%= course.attributes.image_url %>"
                                  alt="<%= course.attributes.title %>"/>
 
+                        <% if (!course.attributes.special_coupon) { %>
                             <div class="voucher-valid-until">
                                 <p><%= course.attributes.voucher_end_date_text %></p>
                             </div>
+                        <% } %>
                         </div>
                     </div>
                     <div class="col-sm-7 col-xs-12">
@@ -50,16 +54,24 @@
                                 </p>
                             </div>
                             <% } else { %>
-                            <div class="pull-left">
-                                <p class="course-price">
-                                    <span>$<%= course.attributes.stockrecords.price_excl_tax %></span>
-                                </p>
-                            </div>
-                            <div class="pull-left">
-                                <p class="course-new-price">
-                                    <span><%- gettext('Now') %> $<%= course.attributes.new_price %></span>
-                                </p>
-                            </div>
+                                <% if (course.attributes.special_coupon) { %>
+                                <div class="pull-left">
+                                    <p class="course-new-price">
+                                        <span><%- course.attributes.special_coupon_message %> $<%= course.attributes.new_price %></span>
+                                    </p>
+                                </div>
+                                <% } else { %>
+                                <div class="pull-left">
+                                    <p class="course-price">
+                                        <span>$<%= course.attributes.stockrecords.price_excl_tax %></span>
+                                    </p>
+                                </div>
+                                <div class="pull-left">
+                                    <p class="course-new-price">
+                                        <span><%- gettext('Now') %> $<%= course.attributes.new_price %></span>
+                                    </p>
+                                </div>
+                                <% } %>
                             <% } %>
                             <div class="pull-right">
                                     <% if (isCredit) { %>
