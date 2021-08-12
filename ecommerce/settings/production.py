@@ -120,5 +120,4 @@ CORS_ALLOW_HEADERS = corsheaders_default_headers + (
 )
 
 # To customize the seat name
-ENABLE_CUSTOM_COURSE_SEAT_NAME = config_from_yaml.get('ENABLE_CUSTOM_COURSE_SEAT_NAME', False)
-CUSTOM_SEAT_NAME = config_from_yaml.get('CUSTOM_SEAT_NAME', '')
+CUSTOM_COURSE_SEAT_NAME = config_from_yaml.get('CUSTOM_COURSE_SEAT_NAME', '')

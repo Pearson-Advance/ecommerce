@@ -808,5 +808,4 @@ SDN_CHECK_API_URL ="https://api.trade.gov/gateway/v1/consolidated_screening_list
 SDN_CHECK_API_KEY = "sdn search key here"
 
 # To customize the seat name
-ENABLE_CUSTOM_COURSE_SEAT_NAME = False
-CUSTOM_SEAT_NAME = '' # Seat in {CUSTOM_SEAT_NAME} course
+CUSTOM_COURSE_SEAT_NAME = '' # Seat in {CUSTOM_COURSE_SEAT_NAME} course
