@@ -224,23 +224,16 @@ def get_utm_session_parameters():
     will be overwritten. If the value does not exist, the key won't be returned.
     Returns:
         dict: {
-            'utm_campaign': url_value or cookie_value,
-            'utm_source': url_value or cookie_value,
-            'utm_medium': url_value or cookie_value,
+            'utm_params': utm params URL encoded
         }.
     """
     request = get_current_request()
     data = {}
-    utm_keys = [
-        'utm_campaign',
-        'utm_medium',
-        'utm_source',
-    ]
 
     if request:
         data.update(request.COOKIES)
         data.update(request.GET.dict())
 
-    utm_params = {key: data[key] for key in utm_keys if key in data}
+    utm_params = {key: value for key, value in data.items() if key.startswith('utm_')}
 
     return {"utm_params": urlencode(utm_params)}
