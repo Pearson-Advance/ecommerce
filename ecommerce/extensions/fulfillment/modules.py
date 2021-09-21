@@ -30,9 +30,9 @@ from ecommerce.core.constants import (
     ISO_8601_FORMAT
 )
 from ecommerce.core.url_utils import (
-    get_lms_enrollment_api_url,
-    get_lms_entitlement_api_url,
     get_external_enrollment_api_url,
+    get_lms_enrollment_api_url,
+    get_lms_entitlement_api_url
 )
 from ecommerce.courses.models import Course
 from ecommerce.courses.utils import mode_for_product
@@ -41,11 +41,7 @@ from ecommerce.enterprise.utils import (
     get_enterprise_customer_uuid_from_voucher,
     get_or_create_enterprise_customer_user
 )
-from ecommerce.extensions.analytics.utils import (
-    audit_log,
-    get_utm_session_parameters,
-    parse_tracking_context,
-)
+from ecommerce.extensions.analytics.utils import audit_log, get_utm_session_parameters, parse_tracking_context
 from ecommerce.extensions.api.v2.views.coupons import CouponViewSet
 from ecommerce.extensions.basket.constants import PURCHASER_BEHALF_ATTRIBUTE
 from ecommerce.extensions.basket.models import BasketAttribute
@@ -568,7 +564,7 @@ class EnrollmentFulfillmentModule(BaseFulfillmentModule):
             payload['program'] = program
 
         order_details = {
-            'number': order.number, 
+            'number': order.number,
             'paid_amount': str(order.total_excl_tax),
             'currency': order.currency,
             'discount': str(order.total_discount_incl_tax),
