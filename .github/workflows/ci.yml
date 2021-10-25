@@ -44,7 +44,7 @@ jobs:
         id: cache-dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.pip-cache-dir.outputs.dir }}
+          path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements/test.txt') }}
 
       - name: Run tests
