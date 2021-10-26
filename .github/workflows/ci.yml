@@ -40,8 +40,8 @@ jobs:
         id: cache-dependencies
         uses: actions/cache@v2
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/tox.txt') }}
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements/tox.txt') }}
 
       - name: Run tests
         run: |
