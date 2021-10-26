@@ -40,3 +40,6 @@ pylint==2.4.4
 # See https://openedx.atlassian.net/browse/ARCHBOM-1141 for details.
 # need an update in configuration before this can be removed.
 pip-tools<5.0.0
+
+# pytest-randomly dropped support for Python 3.5
+#pytest-randomly==3.3.1
