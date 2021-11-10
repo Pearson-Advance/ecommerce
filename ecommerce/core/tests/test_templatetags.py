@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 from crum import set_current_request
 from django.template import Context, Template, TemplateSyntaxError
+from mock import Mock, patch
 
 from ecommerce.tests.testcases import TestCase
 
@@ -45,6 +46,35 @@ class CoreExtrasTests(TestCase):
 
         # If setting is found, tag simply displays setting value.
         self.assertEqual(template.render(Context()), "edX")
+
+    @patch('ecommerce.core.templatetags.core_extras.is_valid_special_coupon')
+    @patch('ecommerce.core.templatetags.core_extras.has_request_siteconfiguration')
+    @patch('ecommerce.core.templatetags.core_extras.get_coupon_name')
+    def test_is_special_coupon_for_order(
+            self, coupon_name_mock, siteconf_mock, is_valid_special_coupon_mock):
+        coupon_name_mock.return_value = '$valid-special-coupon-name'
+        siteconf_mock.return_value = True
+        is_valid_special_coupon_mock.return_value = True
+        setattr(self.request.site.siteconfiguration, 'custom_settings', {'REMOVE_SPECIAL_COUPON_OFFER_PREFIX': '$'})
+        set_current_request(self.request)
+        order = Mock()
+        template = Template(
+            "{% load core_extras %}"
+            "{% is_special_coupon order as is_special_coupon %}"
+            "{{ is_special_coupon }}"
+        )
+
+        self.assertEqual(template.render(Context({'order': order})), "True")
+        coupon_name_mock.assert_called_once_with(order)
+
+        siteconf_mock.return_value = False
+
+        self.assertEqual(template.render(Context({'order': order})), "False")
+
+        coupon_name_mock.return_value = ''
+        siteconf_mock.return_value = True
+
+        self.assertEqual(template.render(Context({'order': order})), "False")
 
     def assertTextCaptured(self, expected):
         template = Template(
