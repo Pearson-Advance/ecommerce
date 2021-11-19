@@ -20,6 +20,7 @@ from six.moves.urllib.parse import urlparse
 from slumber.exceptions import SlumberBaseException
 
 from ecommerce.core.constants import DEFAULT_CATALOG_PAGE_SIZE
+from ecommerce.core.templatetags.core_extras import get_special_coupon_data, is_special_coupon
 from ecommerce.coupons.utils import fetch_course_catalog, get_catalog_course_runs
 from ecommerce.courses.models import Course
 from ecommerce.courses.utils import get_course_info_from_catalog
@@ -98,6 +99,7 @@ class VoucherViewSet(NonDestroyableModelViewSet):
                 path=request.path,
                 query=next_page_query,
             )
+
         return Response(data=offers_data)
 
     def retrieve_course_objects(self, results, course_seat_types):
@@ -339,6 +341,7 @@ class VoucherViewSet(NonDestroyableModelViewSet):
                 image = course_info['media']['image']['raw']
             except (KeyError, TypeError):
                 image = ''
+
         return {
             'benefit': serializers.BenefitSerializer(benefit).data,
             'contains_verified': is_verified,
@@ -351,5 +354,7 @@ class VoucherViewSet(NonDestroyableModelViewSet):
             'seat_type': product.attr.certificate_type,
             'stockrecords': serializers.StockRecordSerializer(stock_record).data,
             'title': course_info.get('title', course.name),
-            'voucher_end_date': voucher.end_datetime
+            'voucher_end_date': voucher.end_datetime,
+            'special_coupon': is_special_coupon(voucher),
+            'special_coupon_message': get_special_coupon_data(voucher),
         }

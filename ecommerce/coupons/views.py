@@ -135,6 +135,8 @@ class CouponOfferView(TemplateView):
             })
             self.template_name = 'coupons/offer.html'
 
+        context_data['voucher'] = voucher
+
         return context_data
 
     @method_decorator(login_required_for_credit)

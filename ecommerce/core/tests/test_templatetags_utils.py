@@ -5,6 +5,7 @@ from mock import Mock
 from ecommerce.core.templatetags.core_extras import get_coupon_name
 from ecommerce.extensions.basket.models import Basket, BasketAttribute, BasketAttributeType
 from ecommerce.extensions.order.models import Order, OrderDiscount
+from ecommerce.extensions.voucher.models import Voucher
 
 
 @ddt.ddt
@@ -92,6 +93,16 @@ class CoreExtrasUtilsTests(TestCase):
         result = get_coupon_name(order_discount)
 
         self.assertEqual(result, '')
+
+    def test_get_coupon_name_from_voucher(self):
+        """This test checks that 'get_coupon_name' returns the coupon name
+        directly from the voucher."""
+        voucher = Mock(spec=Voucher)
+        voucher.name = 'voucher-name'
+
+        result = get_coupon_name(voucher)
+
+        self.assertEqual(result, 'voucher-name')
 
     @ddt.data(None, 'string', [], {'test-key': 'value'}, BasketAttributeType, BasketAttribute)
     def test_get_coupon_name_called_with_unexpected_argument(self, object_provided):
