@@ -118,3 +118,6 @@ ENTERPRISE_CUSTOMERS_EXCLUDED_FROM_CATALOG = config_from_yaml.get('ENTERPRISE_CU
 CORS_ALLOW_HEADERS = corsheaders_default_headers + (
     'use-jwt-cookie',
 )
+
+# To customize the seat name.
+CUSTOM_COURSE_SEAT_NAME = config_from_yaml.get('CUSTOM_COURSE_SEAT_NAME', '')
