@@ -88,6 +88,12 @@ LANGUAGES = (
     ('en', _('English')),
     ('es', _('Spanish')),
     ('es-419', _('Spanish (Latin American)')),
+    ('fr-ca', u'Français (Canada)'),
+    ('de-de', u'Deutsch (Deutschland)'),
+    ('it-it', u'Italiano (Italia)'),
+    ('ar', u'العربية'),
+    ('pt-br', u'Português (Brasil)'),
+    ('zh-cn', u'中文 (简体)'),
 )
 
 LOCALE_PATHS = (
