@@ -10,7 +10,6 @@ from opaque_keys.edx.keys import CourseKey
 
 from ecommerce.extensions.basket.models import Basket
 from ecommerce.extensions.order.models import Order, OrderDiscount
-from ecommerce.extensions.voucher.models import Voucher
 
 register = template.Library()
 
@@ -18,10 +17,10 @@ register = template.Library()
 def get_coupon_name(provided_object):
     """
     The coupon name is extracted from the 'provided_object' argument which could be an
-    Order, Basket, OrderDiscount or Voucher instance.
+    Order, Basket or OrderDiscount instance.
 
     Arguments:
-        provided_object (Order or Basket or OrderDiscount or Voucher): Order of the purchase,
+        provided_object (Order or Basket or OrderDiscount): Order of the purchase,
         its basket or its OrderDiscount.
 
     Returns:
@@ -37,8 +36,6 @@ def get_coupon_name(provided_object):
         coupon_name = coupon.name if coupon else ''
     elif isinstance(provided_object, OrderDiscount):
         coupon_name = provided_object.voucher.name if provided_object.voucher else ''
-    elif isinstance(provided_object, Voucher):
-        coupon_name = provided_object.name
 
     return coupon_name
 
