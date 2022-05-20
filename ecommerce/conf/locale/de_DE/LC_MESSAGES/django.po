@@ -2021,7 +2021,7 @@ msgstr "Rechnung für %(order_number)s"
 
 #: ecommerce/templates/edx/checkout/receipt.html:43
 msgid "Thank you for your order!"
-msgstr "Danke für Ihre Bestellung!"
+msgstr "Vielen Dank für Ihre Bestellung!"
 
 #: ecommerce/templates/edx/checkout/receipt.html:53
 #, python-brace-format
@@ -2037,7 +2037,9 @@ msgid ""
 "Your order is complete. If you need a receipt, you can print this page. You "
 "will also receive a confirmation message with this information at "
 "{link_start}{email}{link_end}."
-msgstr "Ihre Bestellung ist abgeschlossen. Wenn Sie eine Quittung benötigen, können Sie diese Seite ausdrucken. Sie erhalten auch eine Bestätigungsnachricht mit diesen Informationen an {link_start}{email}{link_end}."
+msgstr ""
+"Ihre Bestellung ist abgeschlossen. Wenn Sie eine Quittung benötigen, können Sie diese Seite ausdrucken. Sie erhalten auch eine Bestätigungsnachricht mit diesen Informationen unter "
+"{link_start}{email}{link_end}."
 
 #: ecommerce/templates/edx/checkout/receipt.html:79
 msgid "Order Number:"
@@ -2049,7 +2051,7 @@ msgstr "Zahlungsmethode:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:85
 msgid "Order Date:"
-msgstr "Bestelldatum:"
+msgstr "Datum der Bestellung:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:91
 msgid "Order Information"
@@ -2220,7 +2222,11 @@ msgstr "Rabatt:"
 #: ecommerce/templates/edx/credit/checkout.html:60
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:127
 msgid "Total:"
-msgstr "Gesamt:"
+msgstr "Insgesamt:"
+
+#: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html
+msgid "Order Summary"
+msgstr "Zusammenfassung der Bestellung"
 
 #: ecommerce/templates/edx/credit/checkout.html:89
 msgid "You deserve it."
@@ -2511,7 +2517,7 @@ msgstr "Jahr"
 #: ecommerce/templates/oscar/basket/partials/client_side_checkout_basket.html:274
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:152
 msgid "Place Order"
-msgstr "Kaufen"
+msgstr "Bestellung aufgeben"
 
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:23
 msgid "Earn a valuable certificate to showcase the skills you learn in"

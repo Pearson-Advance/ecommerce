@@ -2072,7 +2072,7 @@ msgstr "Reçu pour %(order_number)s"
 
 #: ecommerce/templates/edx/checkout/receipt.html:43
 msgid "Thank you for your order!"
-msgstr "Nous vous remercions de votre commande!"
+msgstr "Merci pour votre commande!"
 
 #: ecommerce/templates/edx/checkout/receipt.html:53
 #, python-brace-format
@@ -2082,17 +2082,17 @@ msgid ""
 "you can print this page."
 msgstr "Votre commande est complète. Vous recevrez un message de confirmation et vos code(s) d'inscriptions au {link_start}{email}{link_end}. Si vous avez besoin d'un reçu, vous pouvez imprimer cette page."
 
-#: ecommerce/templates/edx/checkout/receipt.html:59
+#: ecommerce/templates/edx/checkout/receipt.html:53
 #, python-brace-format
 msgid ""
-"Your order is complete. If you need a receipt, you can print this page. You "
-"will also receive a confirmation message with this information at "
+"Your order is complete. If you need a receipt, you can print this page. "
+"You will also receive a confirmation message with this information at "
 "{link_start}{email}{link_end}."
-msgstr "Votre commande est complète. Si vous avez besoin d'un reçu, vous pouvez imprimer cette page. Vous recevrez également un message de confirmation contenant ces informations au {link_start}{email}{link_end}."
+msgstr "Votre commande est terminée. Si vous avez besoin d'un reçu, vous pouvez imprimer cette page. Vous recevrez également un message de confirmation contenant ces informations à l'adresse suivante: {link_start}{email}{link_end}."
 
 #: ecommerce/templates/edx/checkout/receipt.html:79
 msgid "Order Number:"
-msgstr "Numéro de commande :"
+msgstr "Numéro de la commande:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:82
 msgid "Payment Method:"
@@ -2100,7 +2100,7 @@ msgstr "Méthode de paiement :"
 
 #: ecommerce/templates/edx/checkout/receipt.html:85
 msgid "Order Date:"
-msgstr "Date de commande :"
+msgstr "Date de la commande:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:91
 msgid "Order Information"
@@ -2272,6 +2272,10 @@ msgstr "Rabais :"
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:127
 msgid "Total:"
 msgstr "Total:"
+
+#: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html
+msgid "Order Summary"
+msgstr "Sommaire de la commande"
 
 #: ecommerce/templates/edx/credit/checkout.html:89
 msgid "You deserve it."
@@ -2562,7 +2566,7 @@ msgstr "Année"
 #: ecommerce/templates/oscar/basket/partials/client_side_checkout_basket.html:274
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:152
 msgid "Place Order"
-msgstr "Placer une commande"
+msgstr "Placer la commande"
 
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:23
 msgid "Earn a valuable certificate to showcase the skills you learn in"

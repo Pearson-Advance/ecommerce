@@ -1675,7 +1675,7 @@ msgstr "客户端"
 #: ecommerce/extensions/voucher/utils.py:319
 #: ecommerce/templates/oscar/dashboard/users/detail.html:138
 msgid "Order Number"
-msgstr "订单号"
+msgstr "订单编号"
 
 #: ecommerce/extensions/voucher/utils.py:283
 #: ecommerce/extensions/voucher/utils.py:302
@@ -2030,7 +2030,7 @@ msgstr "%(order_number)s的收据"
 
 #: ecommerce/templates/edx/checkout/receipt.html:43
 msgid "Thank you for your order!"
-msgstr "感谢您的订购！"
+msgstr "感谢您下单订购！"
 
 #: ecommerce/templates/edx/checkout/receipt.html:53
 #, python-brace-format
@@ -2047,6 +2047,8 @@ msgid ""
 "will also receive a confirmation message with this information at "
 "{link_start}{email}{link_end}."
 msgstr ""
+"您的订单已经完成。如果您需要发票，请打印本页。您还将收到一份包含此信息的确认消息： "
+"{link_start}{email}{link_end}."
 
 #: ecommerce/templates/edx/checkout/receipt.html:79
 msgid "Order Number:"
@@ -2229,7 +2231,12 @@ msgstr "折扣："
 #: ecommerce/templates/edx/credit/checkout.html:60
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:127
 msgid "Total:"
-msgstr "总共:"
+msgstr "总计:"
+
+#: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html
+msgid "Order Summary"
+msgstr "订单小结"
+
 
 #: ecommerce/templates/edx/credit/checkout.html:89
 msgid "You deserve it."
