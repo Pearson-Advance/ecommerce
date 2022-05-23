@@ -2031,11 +2031,11 @@ msgid ""
 "Your order is complete. If you need a receipt, you can print this page. You "
 "will also receive a confirmation message with this information at "
 "{link_start}{email}{link_end}."
-msgstr "L'ordine è stato completato. Se hai bisogno di una ricevuta, puoi stampare questa pagina. Riceverai anche un messaggio di conferma con queste informazioni all'indirizzo {link_start}{email}{link_end}. "
+msgstr "Il tuo ordine è completo. Se hai bisogno di una ricevuta, puoi stampare questa pagina. Riceverai anche un messaggio di conferma con queste informazioni all'indirizzo {link_start}{email}{link_end}. "
 
 #: ecommerce/templates/edx/checkout/receipt.html:79
 msgid "Order Number:"
-msgstr "Numero ordine:"
+msgstr "Numero dell'ordine:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:82
 msgid "Payment Method:"
@@ -2043,7 +2043,7 @@ msgstr "Metodo di pagamento:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:85
 msgid "Order Date:"
-msgstr "Data ordine:"
+msgstr "Data dell'ordine:"
 
 #: ecommerce/templates/edx/checkout/receipt.html:91
 msgid "Order Information"
@@ -2215,6 +2215,10 @@ msgstr "Sconto:"
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:127
 msgid "Total:"
 msgstr "Totale:"
+
+#: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html
+msgid "Order Summary"
+msgstr "Riepilogo dell'ordine"
 
 #: ecommerce/templates/edx/credit/checkout.html:89
 msgid "You deserve it."
@@ -2505,7 +2509,7 @@ msgstr "Anno"
 #: ecommerce/templates/oscar/basket/partials/client_side_checkout_basket.html:274
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:152
 msgid "Place Order"
-msgstr "Invia ordine"
+msgstr "Ordina"
 
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:23
 msgid "Earn a valuable certificate to showcase the skills you learn in"
@@ -3265,7 +3269,7 @@ msgstr "Ordini che hanno utilizzato questa offerta"
 #: ecommerce/templates/oscar/dashboard/offers/offer_detail.html:97
 #: ecommerce/templates/oscar/dashboard/orders/order_list.html:68
 msgid "Order number"
-msgstr "Numero ordine"
+msgstr "Numero dell'ordine"
 
 #: ecommerce/templates/oscar/dashboard/offers/offer_detail.html:98
 msgid "Order date"

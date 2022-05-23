@@ -2028,7 +2028,7 @@ msgstr "إيصال لـ%(order_number)s"
 
 #: ecommerce/templates/edx/checkout/receipt.html:43
 msgid "Thank you for your order!"
-msgstr "شكراً لطلبك!"
+msgstr "!شكرًا لك على طلبك"
 
 #: ecommerce/templates/edx/checkout/receipt.html:53
 #, python-brace-format
@@ -2044,7 +2044,7 @@ msgid ""
 "Your order is complete. If you need a receipt, you can print this page. You "
 "will also receive a confirmation message with this information at "
 "{link_start}{email}{link_end}."
-msgstr "اكتمل طلبك. إذا كنت بحاجة إلى إيصال، يمكنك طباعة هذه الصفحة. سوف تتلقى أيضا رسالة تأكيد مع هذه المعلومات على {link_start}{email}{link_end}."
+msgstr "تم اكتمال طلبك. إذا كنت بحاجة إلى إيصال، يمكنك طباعة هذه الصفحة. ستتلقى أيضًا رسالة تأكيد بهذه المعلومات على {link_start}{email}{link_end}."
 
 #: ecommerce/templates/edx/checkout/receipt.html:79
 msgid "Order Number:"
@@ -2228,6 +2228,10 @@ msgstr "الخصم:"
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:127
 msgid "Total:"
 msgstr "الإجمالي:"
+
+#: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html
+msgid "Order Summary"
+msgstr "ملخص الطلب"
 
 #: ecommerce/templates/edx/credit/checkout.html:89
 msgid "You deserve it."
@@ -2518,7 +2522,7 @@ msgstr "السنة"
 #: ecommerce/templates/oscar/basket/partials/client_side_checkout_basket.html:274
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:152
 msgid "Place Order"
-msgstr "وضع الطلب"
+msgstr "تقديم طلب"
 
 #: ecommerce/templates/oscar/basket/partials/hosted_checkout_basket.html:23
 msgid "Earn a valuable certificate to showcase the skills you learn in"
@@ -3278,7 +3282,7 @@ msgstr "الطلبات التي استخدمت هذا العرض"
 #: ecommerce/templates/oscar/dashboard/offers/offer_detail.html:97
 #: ecommerce/templates/oscar/dashboard/orders/order_list.html:68
 msgid "Order number"
-msgstr "رقم الطلبية"
+msgstr "رقم الطلب"
 
 #: ecommerce/templates/oscar/dashboard/offers/offer_detail.html:98
 msgid "Order date"
