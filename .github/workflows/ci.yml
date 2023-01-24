@@ -37,6 +37,14 @@ jobs:
             cd /edx/app/ecommerce/ecommerce/ &&
             python -m pip install tox
           "
+
+      - name: Cache pip dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements/tox.txt') }}
+
       - name: Run tests
         run: |
           docker exec -t -e CI=1 ecommerce_testing bash -c "
