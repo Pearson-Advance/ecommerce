@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'vue/PADV-325'
+      - 'vue/PADV-325.tests'
 
 jobs:
   docker:
