@@ -25,3 +25,4 @@ jobs:
           building-plugin: true
           enable-plugins-list: 'discovery mfe ecommerce'
           plugin-package: 'tutor-ecommerce'
+#test
