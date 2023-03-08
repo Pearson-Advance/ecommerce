@@ -1,0 +1,27 @@
+name: Tutor Build Action Test
+
+on:
+  push:
+    branches:
+      - 'vue/PADV-325'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Build Image
+        uses: Pearson-Advance/tutor-build-image-action@vue/PADV-325
+        with:
+          python-version: '3.8'
+          tutor-version: '15'
+          path-image-to-be-built: 'env/plugins/ecommerce/build/ecommerce'
+          repository-name: 'pearsonopenedxops'
+          image-name: 'tutor-ecommerce-test'
+          image-tag: '0.0.1'
+          docker-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          docker-token: ${{ secrets.DOCKERHUB_TOKEN }}
+          no-docker-cache: false
+          building-plugin: true
+          enable-plugins-list: 'discovery mfe ecommerce'
+          plugin-package: 'tutor-ecommerce'
