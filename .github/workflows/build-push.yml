@@ -3,7 +3,7 @@ name: Tutor Build Action Test
 on:
   push:
     branches:
-      - 'vue/actions-tests'
+      - 'vue/PADV-325'
 
 jobs:
   docker:
