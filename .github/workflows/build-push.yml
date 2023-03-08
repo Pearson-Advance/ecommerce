@@ -1,9 +1,10 @@
 name: Tutor Build Action Test
 
 on:
-  push:
+  merge:
     branches:
-      - 'vue/PADV-325'
+      - 'pearson-release/olive.main'
+      - 'pearson-release/olive.stage'
 
 jobs:
   docker:
