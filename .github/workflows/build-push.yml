@@ -1,10 +1,9 @@
 name: Tutor Build Action Test
 
 on:
-  merge:
+  push:
     branches:
       - 'pearson-release/olive.main'
-      - 'pearson-release/olive.stage'
 
 jobs:
   docker:
@@ -17,8 +16,8 @@ jobs:
           python-version: '3.8'
           tutor-version: '15'
           path-image-to-be-built: 'env/plugins/ecommerce/build/ecommerce'
-          repository-name: 'pearsonopenedxops'
-          image-name: 'tutor-ecommerce-test'
+          repository-name: 'paops'
+          image-name: 'ecommerce-tutor'
           image-tag: '0.0.1'
           docker-username: ${{ secrets.DOCKERHUB_USERNAME }}
           docker-token: ${{ secrets.DOCKERHUB_TOKEN }}
