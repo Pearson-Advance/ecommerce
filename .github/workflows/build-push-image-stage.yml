@@ -15,7 +15,7 @@ jobs:
         with:
           format: YYYY-MM-DD-HH-mm
       - name: Build Image
-        uses: Pearson-Advance/tutor-build-image-action@0.2.0
+        uses: Pearson-Advance/tutor-build-image-action@v1.0.0
         with:
           python-version: ${{ vars.BUILD_PYTHON_VERSION }}
           tutor-version: ${{ vars.BUILD_TUTOR_VERSION }}
@@ -25,6 +25,7 @@ jobs:
           image-tag: ${{ vars.ECOMMERCE_TUTOR_PLUGIN_VERSION }}-RC-${{ steps.current-time.outputs.formattedTime }}
           docker-username: ${{ secrets.DOCKERHUB_USERNAME }}
           docker-token: ${{ secrets.DOCKERHUB_TOKEN }}
+          gh-access-token: ${{ secrets.GH_PAT }}
           use-docker-cache: ${{ vars.BUILD_USE_CACHE }}
           tutor-plugin-sources: '("git+https://github.com/Pearson-Advance/tutor-ecommerce.git@v${{ vars.ECOMMERCE_TUTOR_PLUGIN_VERSION }}" "git+https://github.com/overhangio/tutor-mfe.git@v15.0.5" "git+https://github.com/overhangio/tutor-discovery.git@v15.0.0")'
           tutor-plugin-names: '("ecommerce" "discovery" "mfe")'
