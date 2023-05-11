@@ -10,6 +10,9 @@ from opaque_keys.edx.keys import CourseKey
 from ecommerce.core.utils import deprecated_traverse_pagination, get_cache_key
 
 
+LMS_COURSES_API_BASE_URL = '/api/courses/v1/courses/'
+
+
 def mode_for_product(product):
     """
     Returns the enrollment mode (aka course mode) for the specified product.
@@ -37,6 +40,9 @@ def _get_discovery_response(site, cache_key, resource, resource_id):
     Returns:
         dict: resource's information for given resource_id received from Discovery API
     """
+    if getattr(settings, 'ENABLE_GET_COURSE_INFO_FROM_LMS', False):
+        return get_course_info_from_lms(site, str(resource_id), cache_key)
+
     course_cached_response = TieredCache.get_cached_response(cache_key)
     if course_cached_response.is_found:
         return course_cached_response.value
@@ -168,3 +174,24 @@ def get_is_personalized_recommendation(course, request):
                 return recommendations['is_personalized_recommendation']
 
     return None
+
+
+def get_course_info_from_lms(site, course_id, cache_key):
+    """
+    Get course information from the LMS courses API.
+
+    Arguments:
+        site (Site): Site object containing Site Configuration data.
+        course_id (str): Course ID pattern.
+        cache_key (str): Cache key for given resource
+
+    Returns:
+        dict: Course information.
+    """
+    lms_api_url = f'{site.siteconfiguration.lms_url_root}{LMS_COURSES_API_BASE_URL}'
+    courses_api_response = site.siteconfiguration.oauth_api_client.get(f'{lms_api_url}{course_id}')
+    course_info = courses_api_response.json()
+
+    TieredCache.set_all_tiers(cache_key, course_info, settings.COURSES_API_CACHE_TIMEOUT)
+
+    return course_info
