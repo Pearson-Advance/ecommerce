@@ -272,8 +272,12 @@ class BasketLogicMixin:
             except (KeyError, TypeError):
                 pass
 
+            if not course_data.get('image_url'):
+                # Get the course image from the LMS course API format.
+                course_data['image_url'] = course.get('media', {}).get('image', {}).get('raw', '')
+
             course_data['product_description'] = course.get('short_description', '')
-            course_data['product_title'] = course.get('title', '')
+            course_data['product_title'] = course.get('title', '') or course.get('name', '')
             course_data['product_subject'] = course.get('subjects') and course.get('subjects')[0].get('slug')
 
             # The course start/end dates are not currently used
