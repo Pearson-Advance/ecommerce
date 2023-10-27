@@ -2,7 +2,7 @@
 
     <% if (courses.length > 1) { %>
         <div class="offer-page-heading">
-            <h3 class="heading"><%= pageHeading %></h3>
+            <h3 class="heading">Welcome</h3>
             <p><%= pageHeadingMessage %></p>
         </div>
     <% } %>
@@ -22,15 +22,8 @@
                 <div class="box-shadow col-xs-12">
                     <div class="col-sm-5">
                         <div class="image-container">
-                            <div class="discount-percentage"><p><%= course.attributes.benefit_value %>
-                                <span><%- gettext('off') %></span></p>
-                            </div>
                             <img class="img-responsive" src="<%= course.attributes.image_url %>"
                                  alt="<%= course.attributes.title %>"/>
-
-                            <div class="voucher-valid-until">
-                                <p><%= course.attributes.voucher_end_date_text %></p>
-                            </div>
                         </div>
                     </div>
                     <div class="col-sm-7 col-xs-12">
@@ -43,24 +36,8 @@
                         <p class="course-start"><%= course.attributes.course_start_date_text %></p>
 
                         <div class="discount-mc-price-group clearfix">
-                            <% if (course.attributes.multiple_credit_providers) { %>
                             <div class="pull-left">
-                                <p class="course-new-price">
-                                    <span><%= course.attributes.benefit_value %> <%- gettext('discount') %></span>
-                                </p>
                             </div>
-                            <% } else { %>
-                            <div class="pull-left">
-                                <p class="course-price">
-                                    <span>$<%= course.attributes.stockrecords.price_excl_tax %></span>
-                                </p>
-                            </div>
-                            <div class="pull-left">
-                                <p class="course-new-price">
-                                    <span><%- gettext('Now') %> $<%= course.attributes.new_price %></span>
-                                </p>
-                            </div>
-                            <% } %>
                             <div class="pull-right">
                                     <% if (isCredit) { %>
                                         <a href="/credit/checkout/<%= course.attributes.id %>/?code=<%= code %>"
@@ -69,14 +46,16 @@
                                            data-track-type="click"
                                            data-track-event="edx.bi.ecommerce.coupons.accept_offer"
                                            data-track-category="coupon-codes"
-                                           data-course-id="<%= course.attributes.id %>">
+                                           data-course-id="<%= course.attributes.id %>"
+                                           style="margin-bottom: 10px;">
                                             <%- gettext('Get Credit') %>
                                         </a>
                                     <% } else { %>
                                         <% if (isEnrollmentCode) { %>
                                         <a href="/coupons/redeem/?code=<%= code %>&sku=<%= course.attributes.stockrecords.partner_sku %>"
                                            id="RedeemEnrollment"
-                                           class="btn btn-success"><%- gettext('Enroll Now') %></a>
+                                           class="btn btn-success"
+                                           style="margin-bottom: 10px;"><%- gettext('Enroll Now') %></a>
                                         <% } else { %>
                                             <a href="/coupons/redeem/?code=<%= code %>&sku=<%= course.attributes.stockrecords.partner_sku %>"
                                                id="PurchaseCertificate"
@@ -84,7 +63,8 @@
                                                data-track-type="click"
                                                data-track-event="edx.bi.ecommerce.coupons.accept_offer"
                                                data-track-category="coupon-codes"
-                                               data-course-id="<%= course.attributes.id %>">
+                                               data-course-id="<%= course.attributes.id %>"
+                                               style="margin-bottom: 10px;">
                                                 <%- gettext('Checkout') %>
                                             </a>
                                         <% } %>
