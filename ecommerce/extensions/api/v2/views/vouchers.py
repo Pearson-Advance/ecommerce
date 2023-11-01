@@ -338,7 +338,8 @@ class VoucherViewSet(NonDestroyableModelViewSet):
         elif 'card_image_url' in course_info:
             image = course_info['card_image_url']
         else:
-            image = ''
+            # Get the course image from the LMS course API format.
+            image = course_info.get('media', {}).get('image', {}).get('raw', '')
         return {
             'benefit': serializers.BenefitSerializer(benefit).data,
             'contains_verified': is_verified,
