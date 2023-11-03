@@ -4,11 +4,9 @@ from urllib.parse import unquote, urljoin
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from ecommerce.core.utils import deprecated_traverse_pagination, get_cache_key
 from edx_django_utils.cache import TieredCache
 from opaque_keys.edx.keys import CourseKey
-
-from ecommerce.core.utils import deprecated_traverse_pagination, get_cache_key
-
 
 LMS_COURSES_API_BASE_URL = '/api/courses/v1/courses/'
 
