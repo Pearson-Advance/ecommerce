@@ -127,6 +127,10 @@ class CouponOfferView(TemplateView):
 
         context_data = super(CouponOfferView, self).get_context_data(**kwargs)
         context_data.update(get_enterprise_customer_consent_failed_context_data(self.request, voucher))
+        request = self.request
+        context_data['enable_login_button'] = request.site.siteconfiguration.custom_settings.get('COUPONS_ENABLE_LOGIN_BUTTON', True)
+
+        print(context_data['enable_login_button'])
 
         if context_data and 'error' not in context_data:
             context_data.update({

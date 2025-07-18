@@ -37,9 +37,10 @@
               {% block small_dropdown_menu %}{% endblock small_dropdown_menu %}
           </li>
         {% else %}
-          <a class="btn btn-primary navbar-btn hidden-xs" href="{% url 'login' %}">{% trans "Login" as tmsg %}{{ tmsg | force_escape }}</a>
-          <li class="visible-xs"><a class="nav-link" href="{% url 'login' %}">{% trans "Login" as tmsg %}{{ tmsg | force_escape }}</a></li>
-          </a>
+          {% if enable_login_button %}
+            <a class="btn btn-primary navbar-btn hidden-xs" href="{% url 'login' %}">{% trans "Login" as tmsg %}{{ tmsg | force_escape }}</a>
+            <li class="visible-xs"><a class="nav-link" href="{% url 'login' %}">{% trans "Login" as tmsg %}{{ tmsg | force_escape }}</a></li>
+          {% endif %}
         {% endif %}
       </ul>
     </div>
