@@ -47,9 +47,9 @@ pygments==2.18.0
     #   accessible-pygments
     #   pydata-sphinx-theme
     #   sphinx
-pytz==2024.1
+pytz==2025.2
     # via babel
-requests==2.32.2
+requests==2.32.5
     # via
     #   -c requirements/constraints.txt
     #   sphinx

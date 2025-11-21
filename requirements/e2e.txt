@@ -28,7 +28,7 @@ click==8.1.7
     # via
     #   -c requirements/base.txt
     #   edx-django-utils
-django==3.2.25
+django==5.2.7
     # via
     #   -c requirements/base.txt
     #   -c requirements/common_constraints.txt
@@ -39,15 +39,15 @@ django-crum==0.7.9
     # via
     #   -c requirements/base.txt
     #   edx-django-utils
-django-waffle==4.1.0
+django-waffle==5.0.0
     # via
     #   -c requirements/base.txt
     #   edx-django-utils
-edx-django-utils==5.14.1
+edx-django-utils==8.0.1
     # via
     #   -c requirements/base.txt
     #   edx-rest-api-client
-edx-rest-api-client==5.6.1
+edx-rest-api-client==6.2.0
     # via
     #   -c requirements/base.txt
     #   -r requirements/e2e.in
@@ -136,11 +136,11 @@ pytest-variables==1.9.0
     #   pytest-selenium
 python-dotenv==1.0.1
     # via -r requirements/e2e.in
-pytz==2024.1
+pytz==2025.2
     # via
     #   -c requirements/base.txt
     #   django
-requests==2.32.2
+requests==2.32.5
     # via
     #   -c requirements/base.txt
     #   -c requirements/constraints.txt

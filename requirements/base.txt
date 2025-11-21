@@ -44,7 +44,7 @@ bcrypt==4.1.3
     # via
     #   cybersource-rest-client-python
     #   paramiko
-billiard==4.2.0
+billiard==4.2.2
     # via celery
 bleach==6.1.0
     # via -r requirements/base.in
@@ -56,7 +56,7 @@ botocore==1.34.116
     #   s3transfer
 cachetools==5.3.3
     # via google-auth
-celery==5.4.0
+celery==5.5.3
     # via
     #   -c requirements/constraints.txt
     #   edx-ecommerce-worker
@@ -121,7 +121,7 @@ defusedxml==0.8.0rc2
     # via
     #   python3-openid
     #   social-auth-core
-django==3.2.25
+django==5.2.7
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
@@ -155,7 +155,7 @@ django==3.2.25
     #   jsonfield2
     #   social-auth-app-django
     #   xss-utils
-django-appconf==1.0.6
+django-appconf==1.1.0
     # via django-compressor
 django-compressor==4.4
     # via
@@ -177,7 +177,7 @@ django-extensions==3.2.3
     # via -r requirements/base.in
 django-extra-views==0.14.0
     # via django-oscar
-django-filter==23.5
+django-filter==25.2
     # via -r requirements/base.in
 django-haystack==3.3b2
     # via django-oscar
@@ -185,7 +185,7 @@ django-libsass==0.9
     # via -r requirements/base.in
 django-model-utils==4.5.1
     # via edx-rbac
-django-oscar==3.2
+django-oscar==4.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/base.in
@@ -203,14 +203,14 @@ django-threadlocals==0.10
     # via -r requirements/base.in
 django-treebeard==4.7.1
     # via django-oscar
-django-waffle==4.1.0
+django-waffle==5.0.0
     # via
     #   -r requirements/base.in
     #   edx-django-utils
     #   edx-drf-extensions
 django-widget-tweaks==1.5.0
     # via django-oscar
-djangorestframework==3.15.1
+djangorestframework==3.16.1
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -232,34 +232,34 @@ drf-jwt==1.19.2
     # via edx-drf-extensions
 drf-yasg==1.21.7
     # via -r requirements/base.in
-edx-auth-backends==4.3.0
+edx-auth-backends==4.6.2
     # via -r requirements/base.in
 edx-braze-client==0.2.5
     # via edx-ecommerce-worker
-edx-django-release-util==1.4.0
+edx-django-release-util==1.5.0
     # via -r requirements/base.in
-edx-django-sites-extensions==4.2.0
+edx-django-sites-extensions==5.1.0
     # via -r requirements/base.in
-edx-django-utils==5.14.1
+edx-django-utils==8.0.1
     # via
     #   -r requirements/base.in
     #   django-config-models
     #   edx-drf-extensions
     #   edx-rest-api-client
     #   getsmarter-api-clients
-edx-drf-extensions==10.3.0
+edx-drf-extensions==10.6.0
     # via
     #   -r requirements/base.in
     #   edx-rbac
-edx-ecommerce-worker==3.3.4
+edx-ecommerce-worker==3.3.5
     # via -r requirements/base.in
-edx-opaque-keys==2.9.0
+edx-opaque-keys==3.0.0
     # via
     #   -r requirements/base.in
     #   edx-drf-extensions
-edx-rbac==1.9.0
+edx-rbac==2.1.0
     # via -r requirements/base.in
-edx-rest-api-client==5.6.1
+edx-rest-api-client==6.2.0
     # via
     #   -r requirements/base.in
     #   edx-ecommerce-worker
@@ -332,7 +332,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-jsonfield==3.1.0
+jsonfield==3.2.0
     # via -r requirements/base.in
 jsonfield2==4.0.0.post0
     # via -r requirements/base.in
@@ -340,7 +340,7 @@ jsonschema==4.22.0
     # via cybersource-rest-client-python
 jsonschema-specifications==2023.12.1
     # via jsonschema
-kombu==5.3.7
+kombu==5.5.4
     # via celery
 libsass==0.23.0
     # via
@@ -370,7 +370,7 @@ multidict==6.0.5
     # via
     #   aiohttp
     #   yarl
-mysqlclient==2.2.4
+mysqlclient==2.2.7
     # via -r requirements/base.in
 naked==0.1.32
     # via
@@ -443,7 +443,7 @@ pyasn1-modules==0.4.0
     # via
     #   google-auth
     #   oauth2client
-pycountry==17.1.8
+pycountry==24.6.1
     # via -r requirements/base.in
 pycparser==2.22
     # via
@@ -499,7 +499,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.in
     #   social-auth-core
-pytz==2024.1
+pytz==2025.2
     # via
     #   -r requirements/base.in
     #   babel
@@ -510,7 +510,7 @@ pytz==2024.1
     #   drf-yasg
     #   getsmarter-api-clients
     #   zeep
-pyyaml==6.0.1
+pyyaml==6.0.3
     # via
     #   cybersource-rest-client-python
     #   drf-yasg
@@ -524,7 +524,7 @@ referencing==0.35.1
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.32.2
+requests==2.32.5
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/base.in
