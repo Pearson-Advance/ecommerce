@@ -1078,7 +1078,7 @@ typing-extensions==4.12.0
     #   kombu
     #   pylint
     #   stripe
-tzdata==2024.1
+tzdata==2025.2
     # via
     #   -r requirements/base.txt
     #   backports-zoneinfo
