@@ -272,7 +272,7 @@ enum34==1.1.10
     # via cybersource-rest-client-python
 extras==1.0.0
     # via cybersource-rest-client-python
-factory-boy==3.2.1
+factory-boy==3.3.3
     # via django-oscar
 faker==25.3.0
     # via factory-boy
