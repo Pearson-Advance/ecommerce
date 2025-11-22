@@ -8,7 +8,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.shortcuts import redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.defaults import page_not_found, server_error
 from django.views.generic import TemplateView
 from django.views.i18n import JavaScriptCatalog
