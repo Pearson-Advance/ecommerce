@@ -1,6 +1,6 @@
 
 
-from django.conf.urls import url
+from django.urls import re_path as url
 from django.contrib.auth.decorators import login_required
 from oscar.apps.basket import apps
 from oscar.core.loading import get_class

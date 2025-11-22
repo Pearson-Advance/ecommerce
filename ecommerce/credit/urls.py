@@ -1,6 +1,6 @@
 
 
-from django.conf.urls import url
+from django.urls import re_path as url
 
 from ecommerce.core.constants import COURSE_ID_PATTERN
 from ecommerce.credit.views import Checkout
