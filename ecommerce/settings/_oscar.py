@@ -17,7 +17,7 @@ OSCAR_APPS = [
     'oscar',
     'oscar.apps.address',
     'oscar.apps.shipping',
-    'oscar.apps.catalogue.reviews',
+    # 'oscar.apps.catalogue.reviews',
     'oscar.apps.search',
     'oscar.apps.wishlists',
 
@@ -45,7 +45,7 @@ OSCAR_APPS = [
     'oscar.apps.dashboard.partners',
     'oscar.apps.dashboard.pages',
     'oscar.apps.dashboard.ranges',
-    'oscar.apps.dashboard.reviews',
+    # 'oscar.apps.dashboard.reviews',
     'oscar.apps.dashboard.vouchers',
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
