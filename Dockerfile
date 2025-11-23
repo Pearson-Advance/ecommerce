@@ -51,7 +51,7 @@ WORKDIR ${ECOMMERCE_CODE_DIR}
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 COPY bower.json bower.json
-# RUN npm install --production && ./node_modules/.bin/bower install --allow-root --production
+RUN npm install --production && ./node_modules/.bin/bower install --allow-root --production
 
 # Expose canonical ecommerce port
 EXPOSE 18130
