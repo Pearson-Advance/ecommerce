@@ -1,7 +1,7 @@
 
 
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, re_path as url
 
 from ecommerce.extensions.payment.views import PaymentFailedView, cybersource, paypal, stripe
 from ecommerce.extensions.payment.views.sdn import SDNCheckFailureView, SDNCheckView, SDNFailure

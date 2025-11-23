@@ -1,7 +1,7 @@
 
 
 from django.apps import apps
-from django.conf.urls import include, url
+from django.urls import include, re_path as url
 from oscar.apps.dashboard.apps import DashboardConfig as BaseDashboardConfig
 from oscar.core.loading import get_class
 

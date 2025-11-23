@@ -2,7 +2,7 @@
 
 from django.apps import apps
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, re_path as url
 
 payment = apps.get_app_config('payment')
 application = apps.get_app_config('ecommerce')
