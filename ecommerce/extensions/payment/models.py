@@ -32,7 +32,9 @@ class PaymentProcessorResponse(models.Model):
 
     class Meta:
         get_latest_by = 'created'
-        index_together = ('processor_name', 'transaction_id')
+        indexes = [
+            models.Index(fields=['processor_name', 'transaction_id']),
+        ]
         verbose_name = _('Payment Processor Response')
         verbose_name_plural = _('Payment Processor Responses')
 
