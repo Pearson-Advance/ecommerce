@@ -7,7 +7,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
 from oscar.apps.payment.exceptions import PaymentError
-from oscar.core.loading import get_class, get_model
+from oscar.core.loading import get_model
 from oscar.core.utils import get_default_currency
 from simple_history.models import HistoricalRecords
 
@@ -24,7 +24,6 @@ ConditionalOffer = get_model('offer', 'ConditionalOffer')
 OrderDiscount = get_model('order', 'OrderDiscount')
 PaymentEvent = get_model('order', 'PaymentEvent')
 PaymentEventType = get_model('order', 'PaymentEventType')
-post_refund = get_class('refund.signals', 'post_refund')
 
 
 class StatusMixin:
@@ -275,6 +274,7 @@ class Refund(StatusMixin, TimeStampedModel):
                 refund_line.set_status(REFUND_LINE.COMPLETE)
 
         if self.status == REFUND.COMPLETE:
+            from .signals import post_refund
             post_refund.send_robust(sender=self.__class__, refund=self)
             return True
 
