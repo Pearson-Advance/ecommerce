@@ -14,7 +14,7 @@ define([
 
             initialize: function() {
                 this.page = 1;
-                this.perPage = 6;
+                this.perPage = 10;
                 this.populated = false;
                 this.updateLimits();
                 this.on('update', this.updateNumberOfPages);
