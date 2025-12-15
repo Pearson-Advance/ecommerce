@@ -49,6 +49,8 @@ from ecommerce.extensions.analytics.utils import (
 from ecommerce.extensions.basket import message_utils
 from ecommerce.extensions.basket.constants import EMAIL_OPT_IN_ATTRIBUTE
 from ecommerce.extensions.basket.exceptions import BadRequestException, RedirectException, VoucherException
+from ecommerce.extensions.voucher.models import Voucher
+from ecommerce.extensions.offer.models import ConditionalOffer
 from ecommerce.extensions.basket.utils import (
     add_invalid_code_message_to_url,
     add_utm_params_to_url,
@@ -423,13 +425,21 @@ class BasketAddItemsView(BasketLogicMixin, APIView):
             skus = self._get_skus(request)
             products = self._get_products(request, skus)
             voucher = None
+            catalog = request.GET.get('catalog', 'default')
             invalid_code = None
+            catalog_offers = ConditionalOffer.get_offer_by_catalog_and_discount(catalog)
+            for offer in catalog_offers:
+                voucher = Voucher.objects.filter(offers=offer, usage='Multi-use-per-Customer').first()
+                if not voucher:
+                    voucher = None
+            
             code = request.GET.get('code', None)
-            try:
-                voucher = self._get_voucher(request)
-            except Voucher.DoesNotExist:  # pragma: nocover
-                # Display an error message when an invalid code is passed as a parameter
-                invalid_code = code
+            if not voucher:
+                try:
+                    voucher = self._get_voucher(request)
+                except Voucher.DoesNotExist:  # pragma: nocover
+                    # Display an error message when an invalid code is passed as a parameter
+                    invalid_code = code
 
             logger.info('Starting payment flow for user [%s] for products [%s].', request.user.username, skus)
 

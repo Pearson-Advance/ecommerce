@@ -37,7 +37,18 @@ JWT_AUTH.update({
         'AUDIENCE': 'lms-key',
         'ISSUER': 'http://localhost:18000/oauth2',
         'SECRET_KEY': 'lms-secret',
-    }],
+    },
+    {
+            'AUDIENCE': 'lms-key',
+            'ISSUER': 'http://edx.devstack.lms:18000/oauth2',
+            'SECRET_KEY': 'lms-secret',
+        },
+        {
+            'AUDIENCE': 'lms-key',
+            'ISSUER': 'http://lms.pearson.localhost:18000/oauth2',
+            'SECRET_KEY': 'lms-secret',
+        }
+    ],
     # Must match public signing key used in LMS.
     'JWT_PUBLIC_SIGNING_JWK_SET': (
         '{"keys": [{"kid": "devstack_key", "e": "AQAB", "kty": "RSA", "n": "smKFSYowG6nNUAdeqH1jQQnH1PmIHphzBmwJ5vRf1vu'
@@ -116,3 +127,9 @@ REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = REST_FRAMEWORK['DEFAULT_RENDERER_CL
 if os.path.isfile(join(dirname(abspath(__file__)), 'private.py')):
     # noinspection PyUnresolvedReferences
     from .private import *  # pylint: disable=import-error
+
+ENTERPRISE_CATALOG_SERVICE_URL = 'http://app.catalog.enterprise:18160/'
+ENABLE_COMPREHENSIVE_THEMING = True
+COMPREHENSIVE_THEME_DIRS = [
+    '/edx/app/edx-themes/ecommerce'
+]

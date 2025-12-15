@@ -403,6 +403,13 @@ class ConditionalOffer(AbstractConditionalOffer):
 
         return is_current
 
+    @classmethod
+    def get_offer_by_catalog_and_discount(cls, enterprise_catalog_uuid):
+        """
+        Get the conditional offer for a given enterprise catalog with 100% discount.
+        """
+        return cls.objects.filter(condition__enterprise_customer_catalog_uuid=enterprise_catalog_uuid,benefit__value=100)
+
 
 def validate_credit_seat_type(course_seat_types):
     if not isinstance(course_seat_types, str):
