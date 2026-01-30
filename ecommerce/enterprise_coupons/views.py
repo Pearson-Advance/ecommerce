@@ -39,7 +39,7 @@ class CouponRedirectView(View):
         try:
             catalog_uuid = get_enterprise_catalog_uuid_from_coupon(coupon_code)
             base_url = request.site.siteconfiguration.lms_url_root
-            mfe_url = get_build_mfe_base_url(catalog_uuid, base_url)
+            mfe_url = get_build_mfe_base_url(catalog_uuid, base_url, coupon_code)
             return redirect(mfe_url)
         except CouponNotFoundError as e:
             logger.error('Coupon not found: %s - Error: %s', coupon_code, str(e))
