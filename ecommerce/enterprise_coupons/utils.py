@@ -25,4 +25,5 @@ def get_build_mfe_base_url(catalog_uuid, coupon_code):
     if not mfe_path:
         raise ValueError('ENTERPRISE_COUPONS_MFE_URL is not configured in settings.')
 
-    return f"{mfe_path}?{urlencode({'catalog': catalog_uuid, 'coupon_code': coupon_code})}"
+    relative_path = f"catalog/{catalog_uuid}/?{urlencode({'coupon_code': coupon_code})}"
+    return urljoin(mfe_path, relative_path)
