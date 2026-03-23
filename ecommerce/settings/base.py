@@ -342,6 +342,7 @@ LOCAL_APPS = [
     'ecommerce.theming',
     'ecommerce.sailthru',
     'ecommerce.enterprise',
+    'ecommerce.enterprise_coupons',
     'ecommerce.management',
 ]
 
@@ -898,3 +899,15 @@ CAMPAIGN_IDS_BY_EMAIL_TYPE = {
     OfferUsageEmailTypes.LOW_BALANCE: BRAZE_OFFER_LOW_BALANCE_CAMPAIGN,
     OfferUsageEmailTypes.OUT_OF_BALANCE: BRAZE_OFFER_NO_BALANCE_CAMPAIGN
 }
+
+# Backend class used to retrieve enterprise coupon information from the database.
+# This backend implements the logic to fetch catalog UUIDs and coupon details.
+ENTERPRISE_COUPON_BACKEND = 'ecommerce.enterprise_coupons.backends.voucher.VoucherModelBackend'
+
+# Base URL for the Enterprise Coupons MFE (Micro-Frontend).
+# Used by the coupon redirect view to construct the catalog page URL.
+ENTERPRISE_COUPONS_MFE_URL = 'http://localhost:2006'
+
+# URL to redirect users when coupon processing fails.
+# Users are redirected here instead of seeing technical error messages.
+ENTERPRISE_COUPONS_ERROR_MFE_URL = 'http://localhost:2006/coupon-error'
